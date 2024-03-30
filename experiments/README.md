@@ -78,5 +78,5 @@ python -m experiments.make_latent_dset --rundir [...] --output_path experiments/
 Finally, you can train a classifier on the embeddings:
 
 ```bash
-python -m experiments.launch_classify_latent embedding_path=experiments/data/mnist-embeddings.pt
+python -m experiments.launch_classify_inr2array embedding_path=experiments/data/mnist-embeddings.pt
 ```
