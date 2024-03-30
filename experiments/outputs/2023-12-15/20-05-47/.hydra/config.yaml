@@ -1,0 +1,25 @@
+nfnet:
+  inp_enc_cls:
+    _target_: nfn.layers.GaussianFourierFeatureTransform
+    _partial_: true
+    mapping_size: 128
+    scale: 3
+  _target_: experiments.stylize_models.TransferNet
+  pos_enc_cls: null
+  hidden_chan: 128
+  hidden_layers: 3
+  mode: HNP
+  out_scale: 0.01
+  lnorm: false
+  dropout: 0
+opt:
+  _target_: torch.optim.Adam
+  lr: 0.001
+sched:
+  _target_: experiments.train_utils.get_linear_warmup
+  warmup_steps: 1000
+batch_size: 32
+max_steps: 50000
+style: dilate
+siren_path: ./experiments/data/siren_mnist_wts
+output_dir: ${hydra:runtime.output_dir}
