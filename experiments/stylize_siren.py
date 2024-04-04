@@ -99,10 +99,10 @@ def main(cfg):
         transforms.ToTensor(),
         transforms.Normalize(torch.Tensor([0.5]), torch.Tensor([0.5]))
     ])
-    dset = SirenAndOriginalDataset(cfg.siren_path, "randinit_smaller", "./experiments/data", data_tfm)
+    dset = SirenAndOriginalDataset(cfg.siren_path, "randinit_smaller", "./experiments/data", "all", data_tfm)
     trainset, testset = Subset(dset, range(50_000)), Subset(dset, range(50_000, 60_000))
     trainset, valset = Subset(trainset, range(45_000)), Subset(trainset, range(45_000, 50_000))
-    batch_siren = get_batch_siren(dset.data_type)
+    batch_siren, _ = get_batch_siren(dset.data_type)
     trainloader = DataLoader(trainset, batch_size=cfg.batch_size, shuffle=True, num_workers=8, drop_last=True)
     valloader = DataLoader(valset, batch_size=32, shuffle=False, num_workers=8, drop_last=True)
 
